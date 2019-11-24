@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //Escreva um programa JavaScript para encontrar o item mais frequente de uma matriz.
+    
+    var array1 = [3, 'a', 'a', 'a', 2, 3, 'a', 3, 'a', 2, 4, 9, 3]
+    console.log(array1)
+    const acharMaior = (counter) => Math.max.apply(null, counter)
+    const ordenarMenorParaMaior = (a, b) => a - b
+    const mapearOcorencias = (name) => {
+    return {count: 1, name: name}
+    }
+    const contarOcorrencia = (a, b) => {
+    a[b.name] = (a[b.name] || 0) + b.count
+    return a
+    }
+    const mapearParaArray = (contagem) => {
+    const counter = []
+    Object.keys(contagem).filter((a) => {
+        counter.push(contagem[a])
+    })
+    return counter
+    }
+    const filtrarModa = (contagem, MAX) => Object.keys(contagem).filter((a) => {
+    return (contagem[a] === MAX && contagem[a] > 1) ? contagem[a] : null
+    })
+
+
+    function moda(array1) {
+    const contagem = array1.sort(ordenarMenorParaMaior).map(mapearOcorencias).reduce(contarOcorrencia, {}) 
+    const filtrada = filtrarModa(contagem, acharMaior(mapearParaArray(contagem)))
+    return filtrada.length ? filtrada : 0
+    }
+    console.log(moda([ 3, 'a', 'a', 'a', 2, 3, 'a', 3, 'a', 2, 4, 9, 3]))
+
+        
+        
+    </script>
+    
+</body>
+</html>
